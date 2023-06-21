@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import com.nextgeni.presenter.ui.moviedetails.MovieDetailsScreen
 import com.nextgeni.presenter.ui.moviedetails.MovieDetailsViewModel
 import com.nextgeni.presenter.ui.movielisting.MovieListingScreen
-import com.nextgeni.presenter.ui.movielisting.MovieListingViewModel
 
 @Composable
 fun MainNavGraph(modifier: Modifier = Modifier,
@@ -18,8 +17,9 @@ fun MainNavGraph(modifier: Modifier = Modifier,
                  startDestination: String = "movies") {
         NavHost(modifier = modifier, navController = navController, startDestination = startDestination) {
             composable("movies") {
-                val viewModel: MovieListingViewModel = hiltViewModel()
-                MovieListingScreen ( uiState = viewModel.uiState, onMovieClick = {navController.navigate("movie_details")})
+                MovieListingScreen (onMovieClick = {
+                    navController.navigate("movie_details")
+                })
             }
             composable("movie_details") {
                 val viewModel: MovieDetailsViewModel = hiltViewModel()
