@@ -20,7 +20,6 @@ class MovieListingViewModel @Inject constructor(val getMoviesUC: GetMoviesUC) : 
     var canPaginate by mutableStateOf(false)
     var listState by mutableStateOf(ListState.IDLE)
     var noDataFound by mutableStateOf(false)
-    val moviesRequest = MoviesGetRequest("en-US", page)
 
 
     init {
@@ -33,7 +32,7 @@ class MovieListingViewModel @Inject constructor(val getMoviesUC: GetMoviesUC) : 
 
                 listState = if (page == 1) ListState.LOADING else ListState.PAGINATING
 
-                getMoviesUC(moviesRequest).catch {
+                getMoviesUC(MoviesGetRequest("en-US", page)).catch {
                     listState = if (page == 1) ListState.ERROR else ListState.PAGINATION_EXHAUST
                     if (page == 1) noDataFound = true
                 }.collect {
