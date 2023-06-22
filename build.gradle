@@ -11,8 +11,8 @@ buildscript {
         hilt_version = '2.44'
     }
     repositories {
-        google()
         mavenCentral()
+        google()
         maven { url "https://www.jitpack.io" }
     }
     dependencies {
