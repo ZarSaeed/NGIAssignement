@@ -38,7 +38,7 @@ class MovieListingViewModel @Inject constructor(val getMoviesUC: GetMoviesUC) : 
                     if (page == 1) noDataFound = true
                 }.collect {
                     if (page == 1 && (it?.results?.size ?: 0) > 0) noDataFound = false
-                    canPaginate = (it?.total_pages?.minus(1)) != page
+                    canPaginate = (it?.total_pages) != page
                     if (page == 1) {
                         moviesList.clear()
                         moviesList.addAll(it?.results!!)

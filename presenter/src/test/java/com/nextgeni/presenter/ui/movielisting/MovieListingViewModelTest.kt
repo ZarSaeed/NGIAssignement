@@ -2,10 +2,10 @@ package com.nextgeni.presenter.ui.movielisting
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nextgeni.domain.models.MoviesPaginatedResponse
-import com.nextgeni.domain.usecases.GetMovieDetailsUC
 import com.nextgeni.domain.usecases.GetMoviesUC
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -28,15 +28,20 @@ class MovieListingViewModelTest {
     }
 
     @Test
-    fun `given page 1 check all pages loaded`() = runTest {
+    fun `getMovies_withPage1_expectingOnly1PageReturn_cannotPaginateFurther`() = runTest {
         //arrange
-        `when`(getMoviesUC(viewModel.moviesRequest)).thenReturn(flowOf(MoviesPaginatedResponse(page = 1,
-            emptyList(),1,1
-        )))
+        `when`(getMoviesUC(viewModel.moviesRequest)).thenReturn(
+            flowOf(
+                MoviesPaginatedResponse(
+                    page = 1,
+                    emptyList(), 1, 1
+                )
+            )
+        )
         //act
         viewModel.getMovies()
         //assert
-        assert(viewModel.listState == MovieListingViewModel.ListState.PAGINATION_EXHAUST)
+        assert(!viewModel.canPaginate)
     }
 
 }
