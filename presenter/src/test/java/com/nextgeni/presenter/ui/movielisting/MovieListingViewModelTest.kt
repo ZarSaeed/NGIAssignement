@@ -1,6 +1,7 @@
 package com.nextgeni.presenter.ui.movielisting
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.nextgeni.domain.models.MoviesGetRequest
 import com.nextgeni.domain.models.MoviesPaginatedResponse
 import com.nextgeni.domain.usecases.GetMoviesUC
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +31,7 @@ class MovieListingViewModelTest {
     @Test
     fun `getMovies_withPage1_expectingOnly1PageReturn_cannotPaginateFurther`() = runTest {
         //arrange
-        `when`(getMoviesUC(viewModel.moviesRequest)).thenReturn(
+        `when`(getMoviesUC(MoviesGetRequest("en-US",1))).thenReturn(
             flowOf(
                 MoviesPaginatedResponse(
                     page = 1,
