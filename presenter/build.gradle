@@ -56,6 +56,7 @@ dependencies {
 
     //dagger hilt
     api "com.google.dagger:hilt-android:$hilt_version"
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-navigation-compose:$compose_navigation"
     kapt "com.google.dagger:dagger-android-processor:$hilt_version"
@@ -64,6 +65,17 @@ dependencies {
 
     //Testing
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation "org.robolectric:robolectric:4.10.3"
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") {
+        // https://github.com/Kotlin/kotlinx.coroutines/tree/master/kotlinx-coroutines-debug#debug-agent-and-android
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+    //Mocking classes and methods
+    testImplementation  'org.mockito:mockito-core:2.25.0'
+    testImplementation  'org.mockito:mockito-inline:2.13.0'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
